@@ -39,7 +39,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Creating the delegate to make edits to my viewController form my settingsViewController
+Creating the delegate to make edits to my viewController from my settingsViewController was pretty hard, but I found this nice useful youtube video on it. https://www.youtube.com/watch?v=VEvOYG-xB54
 
 ## License
 
