@@ -1,5 +1,6 @@
 # iOS
-Hi, I'm Kevin.
+Hi, I'm Kevin Duong.
+email: dkevin@vt.edu
 
 # Pre-work - tips
 
