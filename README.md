@@ -41,6 +41,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Creating the delegate to make edits to my viewController from my settingsViewController was pretty hard, but I found this nice useful youtube video on it. https://www.youtube.com/watch?v=VEvOYG-xB54
 
+I also took my icon image from this link. https://openclipart.org/detail/167182/money-grabber
+
 ## License
 
     Copyright 2015 Kevin Duong
