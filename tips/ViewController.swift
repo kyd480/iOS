@@ -34,6 +34,7 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         setTip(defaults.integerForKey("defaultTip"))
         billField.text = defaults.objectForKey("billAmount") as! String
         changed()
+        billField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,6 +132,10 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
             themeNum = 2
         }
         defaults.setInteger(themeNum, forKey: "defaultTheme")
+    }
+    
+    func setTipNums(tip: [Double]) {
+        
     }
 }
 
