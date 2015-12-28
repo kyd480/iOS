@@ -19,6 +19,7 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
     var themeNum = 0
+    var tipPercentages = [0.18, 0.2, 0.22]
     var defaultColor: UIColor!
     var defaultBlue: UIColor!
     let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -32,7 +33,15 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         defaultBlue = bar.tintColor!
         setTheme(defaults.integerForKey("defaultTheme"))
         setTip(defaults.integerForKey("defaultTip"))
-        billField.text = defaults.objectForKey("billAmount") as! String
+        if defaults.doubleForKey("defaultTip1") != 0 {
+            tipPercentages = [defaults.doubleForKey("defaultTip1"), defaults.doubleForKey("defaultTip2"), defaults.doubleForKey("defaultTip3")]
+        }
+        for var i = 0; i < 3; i++ {
+            let pct = Int(tipPercentages[i] * 100)
+            tipControl.setTitle("\(pct)%", forSegmentAtIndex: i)
+        }
+        
+        billField.text = defaults.objectForKey("billAmount") as! String // does nothing as of now
         changed()
         billField.becomeFirstResponder()
     }
@@ -51,25 +60,17 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     // Pass the selected object to the new view controller.
     }
     */
-    
-//    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-//        if (segue.identifier == "settings") {
-//            let controller : SettingsViewController = segue.sourceViewController as! SettingsViewController
-//            print(controller.tip)
-//        }
-//    }
 
     @IBAction func onEditingChanged(sender: AnyObject) {
         changed()
     }
     
     func changed() {
-        var tipPercentages = [0.18, 0.2, 0.22]
-        var tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
+        let tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
         
-        var billAmount = NSString(string: billField.text!).doubleValue
-        var tip = billAmount * tipPercentage
-        var total = billAmount + tip
+        let billAmount = NSString(string: billField.text!).doubleValue
+        let tip = billAmount * tipPercentage
+        let total = billAmount + tip
         
         defaults.setObject(billField.text!, forKey: "billAmount")
         tipLabel.text = String(format: "$%.2f", tip)
@@ -84,12 +85,14 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         let controller = segue.destinationViewController as! SettingsViewController
         controller.tip = defaults.integerForKey("defaultTip")
         controller.theme = themeNum
+        controller.tipNums = tipPercentages
         controller.delegate = self
     }
     
     func setTip(tip: Int) {
         tipControl.selectedSegmentIndex = tip
         defaults.setInteger(tip, forKey: "defaultTip")
+        defaults.synchronize()
         changed()
     }
     
@@ -132,10 +135,21 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
             themeNum = 2
         }
         defaults.setInteger(themeNum, forKey: "defaultTheme")
+        defaults.synchronize()
     }
     
-    func setTipNums(tip: [Double]) {
+    func setTipNums(tipNums: [Double]) {
+        tipPercentages = tipNums
+        defaults.setDouble(tipPercentages[0], forKey: "defaultTip1")
+        defaults.setDouble(tipPercentages[1], forKey: "defaultTip2")
+        defaults.setDouble(tipPercentages[2], forKey: "defaultTip3")
+        defaults.synchronize()
         
+        for var i = 0; i < 3; i++ {
+            let pct = Int(tipPercentages[i] * 100)
+            tipControl.setTitle("\(pct)%", forSegmentAtIndex: i)
+        }
+        changed()
     }
 }
 

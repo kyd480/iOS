@@ -10,7 +10,7 @@ import UIKit
 
 protocol SettingsViewControllerDelegate: class {
     func setTip(tip:Int)
-    func setTipNums(tip:[Double])
+    func setTipNums(tipNums:[Double])
     func setTheme(theme:Int)
 }
 
