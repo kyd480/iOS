@@ -27,6 +27,7 @@ The following **additional** features are implemented:
 - [ ] List anything else that you can get done to improve the app functionality!
 - [X] User can edit tip percentages from 10%-25%
 - [X] Red/Blue color themes (not that pretty though)
+- [X] Constraints added
 
 ## Video Walkthrough 
 
