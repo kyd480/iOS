@@ -8,7 +8,7 @@ tips is a tip calculator application for iOS.
 
 Submitted by: tips
 
-Time spent: 4 hours spent in total
+Time spent: 10 hours spent in total
 
 ## User Stories
 
